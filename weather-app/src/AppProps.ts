@@ -4,12 +4,12 @@
    * 
    *************/
 
-export interface IAppProps {
+/*export interface IAppProps {
     
-}
+}*/
 
 export interface IAppState {
-    weatherData?: WeatherResponse;
+    weatherData?: IWeatherResponse;
 }
 
 /*******************************/
@@ -19,27 +19,27 @@ export interface IAppState {
    * Weather API response interfaces
    * 
    *************/
-export interface WeatherResponse {
+export interface IWeatherResponse {
     cod: string;
     message: number;
     cnt: number;
-    list: WeatherList[];
-    city: CityInfo;
+    list: IWeatherList[];
+    city: ICityInfo;
 }
 
-export interface WeatherList {
+export interface IWeatherList {
     dt: number;
-    main: TemperatureInfo;
-    weather: WeatherInfo[];
-    clouds: Clouds;
-    wind: Wind;
-    rain?: Rain;
-    snow?: Snow;
-    sys: Sys;
+    main: ITemperatureInfo;
+    weather: IWeatherInfo[];
+    clouds: IClouds;
+    wind: IWind;
+    rain?: IRain;
+    snow?: ISnow;
+    sys: ISys;
     dt_txt: string;
 }
 
-export interface TemperatureInfo {
+export interface ITemperatureInfo {
     temp: number;
     temp_min: number;
     temp_max: number;
@@ -50,42 +50,42 @@ export interface TemperatureInfo {
     temp_kf: number;
 }
 
-export interface WeatherInfo {
+export interface IWeatherInfo {
     id: number;
     main: string;
     description: string;
     icon: string;
 }
 
-export interface Clouds {
+export interface IClouds {
     all: number;
 }
 
-export interface Wind {
+export interface IWind {
     speed: number;
     deg: number;
 }
 
-export interface Rain {
+export interface IRain {
     "3h": number;
 }
 
-export interface Snow {
+export interface ISnow {
     "3h": number;
 }
 
-export interface Sys {
+export interface ISys {
     pod: string;
 }
 
-export interface CityInfo {
+export interface ICityInfo {
     id: number;
     name: string;
-    coord: CityCoordinates;
+    coord: ICityCoordinates;
     country: string;
 }
 
-export interface CityCoordinates {
+export interface ICityCoordinates {
     lat: number;
     lon: number;
 }
