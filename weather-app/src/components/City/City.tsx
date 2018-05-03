@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ICityProps } from '../City/ICityProps';
+import { ICityProps } from './ICityProps';
 
 export default class City extends React.Component<ICityProps, {}> {
 
