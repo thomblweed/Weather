@@ -18,7 +18,7 @@ export default class List extends React.Component<IListProps, {}> {
                <ul>
                 <li>Date: {this.date.toDateString()}</li>
                 <li>Time: {this.date.toLocaleTimeString()}</li>
-                <li>Temperature: {this.props.main.temp}</li>
+                <li>Temperature: {this.props.main.temp} °C</li>
                 <li>Wind Speed: {this.props.wind.speed}</li>
                 <li>Humidity: {this.props.main.humidity}%</li>
                 <li>Rain: {this.props.rain["3h"]}</li>                
