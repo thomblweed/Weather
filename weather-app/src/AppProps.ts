@@ -1,4 +1,4 @@
-import { IWeather } from './components/IWeather';
+import { IWeather } from './components/Weather/IWeather';
 
 /*************
    * 
@@ -7,11 +7,11 @@ import { IWeather } from './components/IWeather';
    *************/
 
 export interface IAppProps {
-    prop?: string;
+    prop: string;
 }
 
 export interface IAppState {
-    weatherData?: IWeather;
+    weatherData: IWeather;
 }
 
 /*******************************/

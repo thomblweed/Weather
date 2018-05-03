@@ -1,23 +1,23 @@
 import * as React from 'react';
 import './App.css';
 import { IAppProps, IAppState } from './AppProps';
-import { IWeather } from './components/IWeather';
-
+import { IWeather } from './components/Weather/IWeather';
+import Weather from './components/Weather/Weather';
 // constants
 import { 
   weatherLocalStorage,
   weatherStorageKey   
 } from './helpers/constants';
 
-export default class App extends React.Component<IAppProps, IAppState> {
+export default class App extends React.Component<{}, IAppState> {
   // variables
   private apiUrl: string;
   private cityId: string;
   private apiKey: string;
   private linesToRespond: number;
 
-  constructor(props: IAppProps, state: IAppState) {
-    super(props);
+  constructor({}, state: IAppState) {
+    super({});
     // 5 day forecast api url
     this.apiUrl = "http://api.openweathermap.org/data/2.5/forecast";
     // city code for Edinburgh
@@ -36,9 +36,10 @@ export default class App extends React.Component<IAppProps, IAppState> {
 
     if(this.state && this.state.weatherData) {
       return (
-        <div className="App">
-          Data Got!
-        </div>            
+        <Weather 
+          city={this.state.weatherData.city}
+          list={this.state.weatherData.list}
+        />           
       );
     }
     else {
