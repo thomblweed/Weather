@@ -3,12 +3,12 @@
    * Weather API response interfaces
    * 
    *************/
-  export interface IWeather {
-    cod: string;
-    message: number;
-    cnt: number;
-    list: IWeatherList[];
-    city: ICityInfo;
+export interface IWeather {
+    cod?: string;
+    message?: number;
+    cnt?: number;
+    list?: IWeatherList[];
+    city?: ICityInfo;
 }
 
 export interface IWeatherList {

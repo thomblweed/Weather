@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './App.css';
-import { IAppState } from './AppProps';
+import { IAppProps, IAppState } from './AppProps';
 import { IWeather } from './components/IWeather';
 
 // constants
@@ -9,14 +9,14 @@ import {
   weatherStorageKey   
 } from './helpers/constants';
 
-export default class App extends React.Component<{}, IAppState> {
+export default class App extends React.Component<IAppProps, IAppState> {
   // variables
   private apiUrl: string;
   private cityId: string;
   private apiKey: string;
   private linesToRespond: number;
 
-  constructor(props: {}) {
+  constructor(props: IAppProps, state: IAppState) {
     super(props);
     // 5 day forecast api url
     this.apiUrl = "http://api.openweathermap.org/data/2.5/forecast";
@@ -26,20 +26,28 @@ export default class App extends React.Component<{}, IAppState> {
     this.apiKey = "bd4ea88dd8b781d2f9a09b97dc3e0d04";
     // number of lines in the response
     this.linesToRespond = 5;
-    
-    this.state = {
-      
-    };
   }
 
   public componentDidMount(): void {
     this.getWeatherDataByCityId();
   }
 
-  public render() {
-    return (
-      <div className="App" />
-    );
+  public render(): React.ReactElement<IAppProps> {
+    debugger;
+    if(this.state && this.state.weatherData) {
+      return (
+        <div className="App">
+          Data Got!
+        </div>            
+      );
+    }
+    else {
+      return (
+        <div className="App">
+          No Data!
+        </div>            
+      );
+    }    
   }
 
   private async getWeatherDataByCityId(): Promise<void>{
