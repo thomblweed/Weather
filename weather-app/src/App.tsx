@@ -33,7 +33,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
   }
 
   public render(): React.ReactElement<IAppProps> {
-    debugger;
+
     if(this.state && this.state.weatherData) {
       return (
         <div className="App">
@@ -47,7 +47,8 @@ export default class App extends React.Component<IAppProps, IAppState> {
           No Data!
         </div>            
       );
-    }    
+    }
+       
   }
 
   private async getWeatherDataByCityId(): Promise<void>{
