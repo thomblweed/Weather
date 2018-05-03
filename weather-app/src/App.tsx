@@ -1,9 +1,7 @@
 import * as React from 'react';
 import './App.css';
-import { 
-  IAppState,
-  IWeatherResponse
-} from './AppProps';
+import { IAppState } from './AppProps';
+import { IWeather } from './components/IWeather';
 
 // constants
 import { 
@@ -20,11 +18,10 @@ export default class App extends React.Component<{}, IAppState> {
 
   constructor(props: {}) {
     super(props);
-
     // 5 day forecast api url
-    this.apiUrl = "api.openweathermap.org/data/2.5/forecast";
+    this.apiUrl = "http://api.openweathermap.org/data/2.5/forecast";
     // city code for Edinburgh
-    this.cityId = "4257043";
+    this.cityId = "2650225";
     // api key
     this.apiKey = "bd4ea88dd8b781d2f9a09b97dc3e0d04";
     // number of lines in the response
@@ -47,7 +44,7 @@ export default class App extends React.Component<{}, IAppState> {
 
   private async getWeatherDataByCityId(): Promise<void>{
     // check if we have data in local storage before calling the api
-    let weatherStorage: IWeatherResponse = weatherLocalStorage.load(weatherStorageKey);
+    let weatherStorage: IWeather = weatherLocalStorage.load(weatherStorageKey);
     // if not in storage then make call to get weather data
     if(!weatherStorage) {
       // build the url for the call
@@ -55,22 +52,22 @@ export default class App extends React.Component<{}, IAppState> {
       try {
         // make the call for the weather data
         const fetchResponse = await fetch(fetchUrl);
-        debugger;
         // response to json
         const responseJson = await fetchResponse.json();
         weatherStorage = responseJson;
-
+        // save to local storage with expiration of 15 minutes
         weatherLocalStorage.save(weatherStorageKey, weatherStorage, 15);
-        // TODO: set state here
+        // set  weather data to the state
         this.setState({ weatherData: weatherStorage });
       } 
       catch (error) {
-        console.log("Fetch Error: ", error);
-        debugger;
         // TODO: error handling
+        console.log("Error fetching weather data by City ID: ", error);
+        debugger;
       }      
     }
     else {
+      // set local storage data to state
       this.setState({ weatherData: weatherStorage });      
     }
   }
