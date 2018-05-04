@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './App.css';
-import { IAppProps, IAppState } from './AppProps';
+import { IAppState } from './AppProps';
 import { IWeather } from './components/Weather/IWeather';
 import Weather from './components/Weather/Weather';
 // constants
@@ -32,7 +32,7 @@ export default class App extends React.Component<{}, IAppState> {
     this.getWeatherDataByCityId();
   }
 
-  public render(): React.ReactElement<IAppProps> {
+  public render(): React.ReactElement<{}> {
     
     if(this.state && this.state.weatherData) {
       return (
@@ -73,8 +73,7 @@ export default class App extends React.Component<{}, IAppState> {
       } 
       catch (error) {
         // TODO: error handling
-        console.log("Error fetching weather data by City ID: ", error);
-        debugger;
+        console.log("Error fetching weather data by City ID: ", error);        
       }      
     }
     else {

@@ -6,10 +6,6 @@ import { IWeather } from './components/Weather/IWeather';
    * 
    *************/
 
-export interface IAppProps {
-    prop: string;
-}
-
 export interface IAppState {
     weatherData: IWeather;
 }

@@ -2,13 +2,25 @@ import * as React from 'react';
 import { IDayProps } from './IDayProps';
 import List from '../List/List';
 
-export default class Day extends React.Component<IDayProps, {}> {
+export default class Day extends React.Component<IDayProps> {
 
+    private date: Date;
+    private todayDateString: string;
+    private todayDate: Date;
+    private today: boolean;
+    
+    constructor(props: IDayProps) {
+        super(props);
+        
+        this.checkToday();      
+    }
+    
     public render(): React.ReactElement<IDayProps> {
         return (
             <div>
+                {this.today && <h3>Today</h3>}
                 <h4>{this.props.date}</h4>
-               {this.createListComponents()}
+                {this.createListComponents()}
             </div>         
         );
     }
@@ -33,5 +45,41 @@ export default class Day extends React.Component<IDayProps, {}> {
                 />
             );
         });
+    }
+
+    private checkToday(): void {
+        this.date = new Date(this.props.date);
+        this.todayDateString = this.getTodayDateString();
+        this.todayDate = new Date(this.todayDateString);
+        
+        let todayDateTime = this.todayDate.getTime();
+        let dateTime = this.date.getTime();
+        
+        if(todayDateTime == dateTime) {
+            this.today = true;            
+        }
+        else {
+            this.today = false;            
+        }  
+    }
+
+    private getTodayDateString(): string {
+        let today = new Date();
+        let dd = today.getDate();
+        let mm = today.getMonth()+1; //January is 0!
+        let yyyy = today.getFullYear();
+        let stringDD: string;
+        let stringMM: string;
+
+        if(dd < 10) {
+            stringDD = "0" + dd;
+        }
+        if(mm < 10) {
+            stringMM = "0" + mm;
+        }
+        let todayString: string;
+        todayString =  yyyy + '-' + stringMM + '-' + stringDD;
+
+        return todayString;
     }
 }

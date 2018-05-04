@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ICityProps } from './ICityProps';
 
-export default class City extends React.Component<ICityProps, {}> {
+export default class City extends React.Component<ICityProps> {
 
     public render(): React.ReactElement<ICityProps> {
         return (

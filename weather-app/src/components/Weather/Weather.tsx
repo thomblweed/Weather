@@ -3,8 +3,24 @@ import { IWeatherProps } from './IWeatherProps';
 import City from '../City/City';
 import Day from '../Day/Day';
 import {IWeatherList } from './IWeather';
+export interface IDayLists {
+    date: string, 
+    list: IWeatherList[]
+}
 
-export default class Weather extends React.Component<IWeatherProps, {}> {
+export default class Weather extends React.Component<IWeatherProps> {
+    // variables
+    private arrayDates: string[] = [];
+    private uniqueDates: string[] = [];
+    private distinctDayLists: IDayLists[] = [];
+
+    constructor(props: IWeatherProps) {
+        super(props);
+        // get values for variables, used to render Day components
+        this.arrayDates = this.getArrayDates();
+        this.uniqueDates = this.getUniqueDates();
+        this.distinctDayLists = this.getDistinctDayLists();        
+    }
     
     public render(): React.ReactElement<IWeatherProps> {
         return (
@@ -19,20 +35,43 @@ export default class Weather extends React.Component<IWeatherProps, {}> {
     }
 
     private createDayComponents(): Object {
-        
+        return Object
+         .keys(this.uniqueDates)
+          .map(key => {
+            return (
+                <Day 
+                 key={key}
+                 list={this.distinctDayLists[key].list}
+                 date={this.distinctDayLists[key].date}
+                />
+            );
+        });
+    }
+
+    private getArrayDates(): string[] {
         // get all dates into an array from the lists
         let arrayDates: string[] = []; 
         let listLength: number = this.props.list.length;
+
         for(let i = 0; i < listLength; i++) {
             arrayDates.push(this.props.list[i].dt_txt.slice(0,10));
         }
 
+        return arrayDates;
+    }
+
+    private getUniqueDates(): string[] {
         // get the unique dates to render Day components
-        let uniqueDates: string[] = arrayDates.filter((value, index, date) => index === date.indexOf(value) );
-        
+        let uniqueDates: string[] = this.arrayDates.filter((value, index, date) => index === date.indexOf(value) );
+
+        return uniqueDates;
+    }
+
+    private getDistinctDayLists(): IDayLists[] {        
         // get distinct Lists for each Day component
-        let distinctDayLists: { date: string, list: IWeatherList[] } [] = [];
-        uniqueDates.filter((value, index) => {
+        let distinctDayLists: IDayLists[] = [];
+
+        this.uniqueDates.filter((value, index) => {
             let currentLists: IWeatherList[] = [];
             this.props.list.filter((li) => {
                 if(li.dt_txt.slice(0,10) === value) {
@@ -42,16 +81,6 @@ export default class Weather extends React.Component<IWeatherProps, {}> {
             distinctDayLists.push( { date: value, list: currentLists } );
         });
 
-        return Object
-         .keys(uniqueDates)
-          .map(key => {
-            return (
-                <Day 
-                 key={key}
-                 list={distinctDayLists[key].list}
-                 date={distinctDayLists[key].date}
-                />
-            );
-        });
+        return distinctDayLists;
     }
 }
