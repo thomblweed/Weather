@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { IWeatherProps } from './IWeatherProps';
 import City from '../City/City';
-import List from '../List/List';
+import Day from '../Day/Day';
+import {IWeatherList } from './IWeather';
 
 export default class Weather extends React.Component<IWeatherProps, {}> {
     
@@ -12,48 +13,43 @@ export default class Weather extends React.Component<IWeatherProps, {}> {
                 name={this.props.city.name}
                 country={this.props.city.country}
                />
-               {this.createListComponents()}
+               {this.createDayComponents()}
             </div>         
         );
     }
 
-    // CREATE DAY COMPONENT CONTAINER
-    // PASS IN RELEVENT LIST COMPONENTS
-
-    // create a List component for each value past through in the list property
-    private createListComponents(): Object {
-
+    private createDayComponents(): Object {
+        
+        // get all dates into an array from the lists
         let arrayDates: string[] = []; 
         let listLength: number = this.props.list.length;
-        // get all dates into an array
-        for(let i = 0; i < listLength; i++ ) {
+        for(let i = 0; i < listLength; i++) {
             arrayDates.push(this.props.list[i].dt_txt.slice(0,10));
         }
 
-        // get the unique days to render day components
-        let uniqueDates: string[] = arrayDates.filter((element, index, date) => index === date.indexOf(element) );
-        console.log(uniqueDates);
+        // get the unique dates to render Day components
+        let uniqueDates: string[] = arrayDates.filter((value, index, date) => index === date.indexOf(value) );
         
-        // get distinct Lists to pass into each Day
-        let uniqueLists = this.props.list.filter((element, index, list) => element.dt_txt.slice(0,10) === uniqueDates[index] );
-        console.log(uniqueLists);
-        debugger;
+        // get distinct Lists for each Day component
+        let distinctDayLists: { date: string, list: IWeatherList[] } [] = [];
+        uniqueDates.filter((value, index) => {
+            let currentLists: IWeatherList[] = [];
+            this.props.list.filter((li) => {
+                if(li.dt_txt.slice(0,10) === value) {
+                    currentLists.push(li);
+                }
+            });
+            distinctDayLists.push( { date: value, list: currentLists } );
+        });
 
         return Object
-         .keys(this.props.list)
+         .keys(uniqueDates)
           .map(key => {
             return (
-                <List 
+                <Day 
                  key={key}
-                 dt={this.props.list[key].dt}
-                 main={this.props.list[key].main}
-                 weather={this.props.list[key].weather}
-                 clouds={this.props.list[key].clouds} 
-                 wind={this.props.list[key].wind}
-                 rain={this.props.list[key].rain}
-                 snow={this.props.list[key].snow}
-                 sys={this.props.list[key].sys}
-                 dt_txt={this.props.list[key].dt_txt}
+                 list={distinctDayLists[key].list}
+                 date={distinctDayLists[key].date}
                 />
             );
         });

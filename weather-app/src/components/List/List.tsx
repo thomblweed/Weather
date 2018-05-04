@@ -13,8 +13,8 @@ export default class List extends React.Component<IListProps, {}> {
         this.todayDateAtMidnight = new Date(this.todayDateString);
         let dateAtMidnight = new Date(this.date.getFullYear(), this.date.getMonth(), this.date.getDate());
         
-        if(dateAtMidnight.getTime() == this.todayDateAtMidnight.getTime()){
-            console.log("Today", this.date);
+        if(dateAtMidnight.getTime() == this.todayDateAtMidnight.getTime()) {
+            console.log("Today:", this.date);
         }
         else {
             console.log("Not Today:", this.date);
