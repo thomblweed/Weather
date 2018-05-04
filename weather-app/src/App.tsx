@@ -33,7 +33,7 @@ export default class App extends React.Component<{}, IAppState> {
   }
 
   public render(): React.ReactElement<IAppProps> {
-
+    
     if(this.state && this.state.weatherData) {
       return (
         <Weather 
