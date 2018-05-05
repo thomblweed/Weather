@@ -1,0 +1,61 @@
+.cityTitle {
+    border-style: solid;
+    border-width: 1px;
+    /*width: 660px;*/
+}
+
+.todayOuter {
+    border-style: solid;
+    border-width: 1px;
+    float: left;    
+}
+
+.todayInner {
+    border-style: solid;
+    border-width: 1px;    
+    padding: 25px;
+    background-color: #eee; 
+}
+
+.futureOuter {
+    border-style: solid;
+    border-width: 1px;
+    display: inline-flex;   
+    float: left;
+    clear: both;    
+}
+
+.futureInner {
+    padding: 5px;
+    font-size: 12px;
+    width: 55px;
+}
+
+.futureInner img {
+    width: 35px;
+}
+
+.listWrapperToday {
+    display: inline-flex;
+    position: relative;
+}
+
+.listWrapperFuture {
+    display: inline-flex; 
+}
+
+.dateWrapperToday {
+    padding-left: 25px;
+    height: 60px;
+    background-color: bisque;
+}
+
+.dateWrapperToday h3 {
+    width: 50%;
+    float: left;
+}
+
+.dateWrapperToday h4 {
+    width: 50%;
+    float: right;
+}

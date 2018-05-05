@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { IDayProps } from './IDayProps';
 import List from '../List/List';
+import '../../helpers/weather.css';
 
 export default class Day extends React.Component<IDayProps> {
 
@@ -17,10 +18,14 @@ export default class Day extends React.Component<IDayProps> {
     
     public render(): React.ReactElement<IDayProps> {
         return (
-            <div>
-                {this.today && <h3>Today</h3>}
-                <h4>{this.props.date}</h4>
-                {this.createListComponents()}
+            <div className={this.today ? "todayOuter" : "futureOuter"}>
+                <div className={this.today ? "dateWrapperToday" : "dateWrapperFuture"}>
+                    {this.today && <h3>Today</h3>}
+                    <h4>{this.props.date}</h4>
+                </div>
+                <div className={this.today ? "listWrapperToday" : "listWrapperFuture"}>
+                    {this.createListComponents()}
+                </div>
             </div>         
         );
     }
@@ -42,6 +47,7 @@ export default class Day extends React.Component<IDayProps> {
                  snow={this.props.list[key].snow}
                  sys={this.props.list[key].sys}
                  dt_txt={this.props.list[key].dt_txt}
+                 today={this.today}
                 />
             );
         });

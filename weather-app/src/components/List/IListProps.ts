@@ -10,4 +10,5 @@ export interface IListProps {
     snow?: ISnow;
     sys: ISys;
     dt_txt: string;
+    today: boolean;
 }

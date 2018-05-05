@@ -17,16 +17,13 @@ export default class List extends React.Component<IListProps, {}> {
 
     public render(): React.ReactElement<IListProps> {
         return (
-            <div>
-               <ul>
-                <li>Date: {this.date.toDateString()}</li>
-                <li>Time: {this.date.toLocaleTimeString()}</li>
-                <li>Temperature: {this.props.main.temp} °C</li>
-                <li>Wind Speed: {this.props.wind.speed}</li>
-                <li>Humidity: {this.props.main.humidity}%</li>
-                <li>Rain: {this.props.rain["3h"]}</li>                
-               </ul> 
-            </div>         
+            <div className={this.props.today ? "todayInner" : "futureInner"}>
+                <div>{this.date.toLocaleTimeString().slice(0,5)}</div>
+                <img src={"http://openweathermap.org/img/w/" + this.props.weather[0].icon +".png"} />
+                <div>{Math.ceil(this.props.main.temp * 10) / 10} °C</div>
+                <div>{this.props.wind.speed} m/s</div>
+                <div>{this.props.main.humidity}%</div>
+            </div>
         );
     }
     
