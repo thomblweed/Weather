@@ -8,7 +8,7 @@ export default class List extends React.Component<IListProps, {}> {
     constructor(props: IListProps) {
         super(props);
         
-        this.date = new Date(this.props.dt*1000);
+        this.date = new Date(this.props.dt*1000);        
     }
     
     public componentDidMount(): void {

@@ -21,7 +21,7 @@ export default class Day extends React.Component<IDayProps> {
             <div className={this.today ? "todayOuter" : "futureOuter"}>
                 <div className={this.today ? "dateWrapperToday" : "dateWrapperFuture"}>
                     {this.today && <h3>Today</h3>}
-                    <h4>{this.props.date}</h4>
+                    <h4>{this.date.toDateString()}</h4>
                 </div>
                 <div className={this.today ? "listWrapperToday" : "listWrapperFuture"}>
                     {this.createListComponents()}
