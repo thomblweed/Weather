@@ -1,11 +1,14 @@
 .cityTitle {
-    border-style: solid none solid none;
-    border-width: 1px;
-    max-width: 782px;    
+    /*border-style: solid none solid none;
+    border-width: 1px;*/
+    max-width: 782px;
+    padding-top: 5px;
+    color: #d26c22;   
 }
 
 .cityTitle h1, .cityTitle h2 {
     padding-left: 25px;
+    margin: 10px 0px 0px 0px;
 }
 
 .todayOuter {
@@ -27,7 +30,6 @@
     float: left;
     clear: both;    
     padding-top: 10px;
-    padding-bottom: 10px;
     min-width: 782px;
     background-color: #eee;
 }
@@ -73,13 +75,19 @@
 }
 
 .dateWrapperFuture {
-    width: 175px;    
+    width: 175px;
+    color: #d26c22;    
 }
 
 .dateWrapperFuture h4 {
     padding-left: 20px;
     font-size: 14px;
     margin-top: 5px;
+}
+
+.dateWrapperFuture p {
+    padding-left: 20px;
+    font-size: 12px;
 }
 
 .timeWrapper {

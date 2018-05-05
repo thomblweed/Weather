@@ -4,16 +4,20 @@ import List from '../List/List';
 import '../../helpers/weather.css';
 
 export default class Day extends React.Component<IDayProps> {
-
+    // variables required for showing UK days and date in format
     private date: Date;
     private todayDateString: string;
     private todayDate: Date;
     private today: boolean;
+    private weekDay: string;
+    private numericDay: string;
+    private month: string;
+    private year: string;
     
     constructor(props: IDayProps) {
         super(props);
-        
-        this.checkToday();      
+        // set values to the local variables
+        this.processDateAndDayVariables();
     }
     
     public render(): React.ReactElement<IDayProps> {
@@ -21,7 +25,9 @@ export default class Day extends React.Component<IDayProps> {
             <div className={this.today ? "todayOuter" : "futureOuter"}>
                 <div className={this.today ? "dateWrapperToday" : "dateWrapperFuture"}>
                     {this.today && <h3>Today</h3>}
-                    <h4>{this.date.toDateString()}</h4>
+                    {this.today && <h4>{this.weekDay + this.numericDay + " " + this.month + " " + this.year}</h4>}
+                    {!this.today && <h4>{this.weekDay}</h4>}
+                    {!this.today && <p>{this.numericDay + " " + this.month + " " + this.year}</p>}
                 </div>
                 <div className={this.today ? "listWrapperToday" : "listWrapperFuture"}>
                     {this.createListComponents()}
@@ -30,7 +36,7 @@ export default class Day extends React.Component<IDayProps> {
         );
     }
 
-    // create a List component for each value past through in the list property
+    // create a List component for each value past through in the array list property
     private createListComponents(): Object {
         return Object
          .keys(this.props.list)
@@ -53,14 +59,19 @@ export default class Day extends React.Component<IDayProps> {
         });
     }
 
-    private checkToday(): void {
+    private processDateAndDayVariables(): void {
+        
         this.date = new Date(this.props.date);
+        this.weekDay = this.date.toLocaleString("en-uk", { weekday: "long" });
+        this.numericDay = this.date.toLocaleString("en-uk", { day: "2-digit" });
+        this.month = this.date.toLocaleString("en-uk", { month: "long" });
+        this.year = this.date.toLocaleString("en-uk", { year: "numeric" });
+        
         this.todayDateString = this.getTodayDateString();
-        this.todayDate = new Date(this.todayDateString);
-        
+        this.todayDate = new Date(this.todayDateString);        
+
         let todayDateTime = this.todayDate.getTime();
-        let dateTime = this.date.getTime();
-        
+        let dateTime = this.date.getTime();        
         if(todayDateTime == dateTime) {
             this.today = true;            
         }

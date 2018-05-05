@@ -17,6 +17,7 @@ export default class Weather extends React.Component<IWeatherProps> {
     constructor(props: IWeatherProps) {
         super(props);
         // get values for variables, used to render Day components
+        // as the api data returned does not group into days by default
         this.arrayDates = this.getArrayDates();
         this.uniqueDates = this.getUniqueDates();
         this.distinctDayLists = this.getDistinctDayLists();        
@@ -61,7 +62,7 @@ export default class Weather extends React.Component<IWeatherProps> {
     }
 
     private getUniqueDates(): string[] {
-        // get the unique dates to render Day components
+        // get the unique dates from the array to render Day components
         let uniqueDates: string[] = this.arrayDates.filter((value, index, date) => index === date.indexOf(value) );
 
         return uniqueDates;
