@@ -8,7 +8,7 @@
 
 .cityTitle h1, .cityTitle h2 {
     padding-left: 25px;
-    margin: 10px 0px 0px 0px;
+    margin: 10px 0px 10px 0px;
 }
 
 .todayOuter {
@@ -47,7 +47,6 @@
 .listWrapperToday {
     display: inline-flex;
     position: relative;
-    /*background-color: lightsteelblue;*/
     min-width: 782px;
     padding-left: 12px;
 }
@@ -57,11 +56,9 @@
 }
 
 .dateWrapperToday {
-    /*border-style: none none solid none;*/
     border-width: 1px;
     padding-left: 25px;
-    height: 60px;
-    /*background-color: lightblue;*/
+    height: 60px;    
 }
 
 .dateWrapperToday h3 {

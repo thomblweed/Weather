@@ -14,8 +14,7 @@ export default class App extends React.Component<{}, IAppState> {
   private apiUrl: string;
   private cityId: string;
   private apiKey: string;
-  // private linesToRespond: number;
-
+  
   constructor({}, state: IAppState) {
     super({});
     // 5 day forecast api url
@@ -23,9 +22,7 @@ export default class App extends React.Component<{}, IAppState> {
     // city code for Edinburgh
     this.cityId = "2650225";
     // api key
-    this.apiKey = "bd4ea88dd8b781d2f9a09b97dc3e0d04";
-    // number of lines in the response
-    // this.linesToRespond = 25;
+    this.apiKey = "bd4ea88dd8b781d2f9a09b97dc3e0d04";    
   }
 
   public componentDidMount(): void {
@@ -59,7 +56,6 @@ export default class App extends React.Component<{}, IAppState> {
     if(!weatherStorage) {
       // build the url for the call
       const fetchUrl = this.apiUrl + "?id=" + this.cityId + "&appid=" + this.apiKey + "&units=metric";
-       // "&cnt=" + this.linesToRespond +
       try {
         // make the call for the weather data
         const fetchResponse = await fetch(fetchUrl);
