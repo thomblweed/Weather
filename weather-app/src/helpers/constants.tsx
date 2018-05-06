@@ -25,5 +25,13 @@ export const weatherLocalStorage = {
             return false;
         }
 		return (new Date().getTime() < record.timestamp && JSON.parse(record.value));
+	},
+	remove : function(key: any) {
+		if(typeof (Storage) === "undefined") { 
+		  return false; 
+		}
+		
+		localStorage.removeItem(key);
+		return true;
 	}
 }

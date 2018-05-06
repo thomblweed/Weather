@@ -25,7 +25,7 @@ export default class Weather extends React.Component<IWeatherProps> {
     
     public render(): React.ReactElement<IWeatherProps> {
         return (
-            <div>
+            <div className={"weatherWrapper"}>
                <City 
                 name={this.props.city.name}
                 country={this.props.city.country}

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './App.css';
-import { IAppState } from './AppProps';
+import { IAppProps, IAppState } from './AppProps';
 import { IWeather } from './components/Weather/IWeather';
 import Weather from './components/Weather/Weather';
 // constants
@@ -9,30 +9,28 @@ import {
   weatherStorageKey   
 } from './helpers/constants';
 
-export default class App extends React.Component<{}, IAppState> {
-  // variables
-  private apiUrl: string;
-  private cityId: string;
-  private apiKey: string;
-  
-  constructor({}, state: IAppState) {
-    super({});
-    // 5 day forecast api url
-    this.apiUrl = "http://api.openweathermap.org/data/2.5/forecast";
-    // city code for Edinburgh
-    this.cityId = "2650225";
-    // api key
-    this.apiKey = "bd4ea88dd8b781d2f9a09b97dc3e0d04";
+export default class App extends React.Component<IAppProps, IAppState> {
+   
+  constructor(props: IAppProps, state: IAppState) {
+    super(props);  
+
+    this.state = {
+      weatherData: null,
+      error: false
+    }
+
   }
 
   public componentDidMount(): void {
+    // check flag and remove weather data from local storage
+    this.checkRemoveLocalStorage();
     // process async call to the weather data
     this.getWeatherDataByCityId();
   }
 
   public render(): React.ReactElement<{}> {
     
-    if(this.state && this.state.weatherData) {
+    if(this.state && this.state.weatherData !== null) {
       return (
         <Weather 
           city={this.state.weatherData.city}
@@ -65,7 +63,7 @@ export default class App extends React.Component<{}, IAppState> {
     // if not in storage then make call to get weather data
     if(!weatherStorage) {
       // build the url for the call
-      const fetchUrl = this.apiUrl + "?id=" + this.cityId + "&appid=" + this.apiKey + "&units=metric";
+      const fetchUrl = this.props.apiUrl + "?id=" + this.props.cityId + "&appid=" + this.props.apiKey + "&units=metric";
       try {
         // make the call for the weather data
         const fetchResponse = await fetch(fetchUrl);
@@ -87,6 +85,13 @@ export default class App extends React.Component<{}, IAppState> {
     else {
       // set local storage data to state
       this.setState({ weatherData: weatherStorage });      
+    }
+  }
+
+  // Checks if local storage value requires removal
+  private checkRemoveLocalStorage(): void {
+    if(this.props.flushLocalStorage) {
+      weatherLocalStorage.remove(weatherStorageKey);
     }
   }
 }
