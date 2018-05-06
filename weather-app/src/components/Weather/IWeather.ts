@@ -1,7 +1,7 @@
 /*************
    * 
-   * Weather API response interfaces
-   * 
+   * Weather API response interfaces.
+   *  
    *************/
 export interface IWeather {
     cod?: string;

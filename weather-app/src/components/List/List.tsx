@@ -3,19 +3,8 @@ import { IListProps } from './IListProps';
 
 export default class List extends React.Component<IListProps, {}> {
     
-    // private date: Date;
-    
-    constructor(props: IListProps) {
-        super(props);
-        
-        /*this.date = new Date(this.props.dt*1000);
-        let hour = this.date.toLocaleString("en-uk",{ hour: "numeric" });
-        let minute = this.date.toLocaleString("en-uk",{ minute: "numeric" });
-        console.log(hour + " " + minute);
-        console.log(this.props.dt_txt.slice(11,16));
-        debugger;*/
-    }
-    
+    // render a List component with the weather information
+    // kept the information simple for demonstration purposes
     public render(): React.ReactElement<IListProps> {
         return (
             <div className={this.props.today ? "todayInner" : "futureInner"}>

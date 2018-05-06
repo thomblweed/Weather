@@ -36,9 +36,11 @@ export default class Weather extends React.Component<IWeatherProps> {
     }
 
     private createDayComponents(): Object {
+        // using the unique dates as the enumerator, render the Day components
         return Object
          .keys(this.uniqueDates)
           .map(key => {
+            // pass through the distinct list values for each Day
             return (
                 <Day 
                  key={key}

@@ -4,7 +4,7 @@ import List from '../List/List';
 import '../../helpers/weather.css';
 
 export default class Day extends React.Component<IDayProps> {
-    // variables required for showing UK days and date in format
+    // variables required for showing UK days and dates
     private date: Date;
     private todayDateString: string;
     private todayDate: Date;
@@ -36,7 +36,7 @@ export default class Day extends React.Component<IDayProps> {
         );
     }
 
-    // create a List component for each value past through in the array list property
+    // render a List component for each value past through in the array list property
     private createListComponents(): Object {
         return Object
          .keys(this.props.list)
@@ -61,6 +61,7 @@ export default class Day extends React.Component<IDayProps> {
 
     private processDateAndDayVariables(): void {
         
+        // set 'friendly' date formatting names to the local variables
         this.date = new Date(this.props.date);
         this.weekDay = this.date.toLocaleString("en-uk", { weekday: "long" });
         this.numericDay = this.date.toLocaleString("en-uk", { day: "2-digit" });

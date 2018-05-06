@@ -30,6 +30,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
 
   public render(): React.ReactElement<{}> {
     
+    // if we have weather data in the state, render the Weather Component
     if(this.state && this.state.weatherData !== null) {
       return (
         <Weather 
@@ -38,6 +39,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
         />           
       );
     }
+    // else if we have an error, render a feedback message to the user
     else if (this.state && this.state.error) {
       return (
         <div>
@@ -45,6 +47,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
         </div>     
       );
     }
+    // otherwise we are waiting for the async call to the data api for weather data
     else {
       return (
         <div>
@@ -63,6 +66,8 @@ export default class App extends React.Component<IAppProps, IAppState> {
     // if not in storage then make call to get weather data
     if(!weatherStorage) {
       // build the url for the call
+      // using City Id paramter for the most accurate response
+      // using a metric paramter for the UK
       const fetchUrl = this.props.apiUrl + "?id=" + this.props.cityId + "&appid=" + this.props.apiKey + "&units=metric";
       try {
         // make the call for the weather data
