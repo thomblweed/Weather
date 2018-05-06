@@ -74,11 +74,10 @@ export default class App extends React.Component<IAppProps, IAppState> {
         const fetchResponse = await fetch(fetchUrl);
         // process the response to json
         const responseJson = await fetchResponse.json();
-        weatherStorage = responseJson;
         // save to local storage with expiration of 15 minutes
-        weatherLocalStorage.save(weatherStorageKey, weatherStorage, 15);
+        weatherLocalStorage.save(weatherStorageKey, responseJson, 15);
         // set weather data to the state
-        this.setState({ weatherData: weatherStorage });
+        this.setState({ weatherData: responseJson });
       } 
       catch (error) {
         // log error message to the console

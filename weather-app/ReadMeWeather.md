@@ -15,7 +15,10 @@
  A couple of things I noted when reading the api documentation.  It is recommended to use a City Id for the most accurate data call.  There is a paramter for returning metric values which is relevent for the UK.  Also, the documentation mentions not to call the data more than once in a 10 minute period, so I implemented a localStorage key to save the data after the initial call (with expiry time of 15 mins). 
 
 # Handling the 5 day/3 hour data returned
- 
+ I decided it would be clearer to group the results by Day/Date as the data returned from the api does not group by date/day by default.
+
+# Using React
+ I am using React as this is the approach I use in my current role for SharePoint 365 development, and thought it best to show the skills I have obtained with this over the past year or so. The setup has some differences when using react app (as opposed to SharePoint React web parts) of which I have read up on while performing this exercise.
 
 ## Future Improvements and Thoughts ##
 -- As mentioned below (in testing section) I would like to get into using unit tests for React
