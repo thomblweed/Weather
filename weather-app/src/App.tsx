@@ -82,7 +82,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
       } 
       catch (error) {
         // log error message to the console
-        console.log("Error fetching weather data by City ID: ", error);
+        console.log("Error fetching weather data by City ID: ", error.stack);
         // flag to the state that we have an error
         this.setState({ error: true });
       }      
