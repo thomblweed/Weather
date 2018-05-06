@@ -9,7 +9,7 @@ export default class List extends React.Component<IListProps, {}> {
         return (
             <div className={this.props.today ? "todayInner" : "futureInner"}>
                 <div className={"timeWrapper"}>{this.props.dt_txt.slice(11,16)}</div>
-                <img src={"http://openweathermap.org/img/w/" + this.props.weather[0].icon +".png"} />
+                <img src={"https://openweathermap.org/img/w/" + this.props.weather[0].icon +".png"} />
                 <div>{Math.ceil(this.props.main.temp * 10) / 10} °C</div>
                 <div><p>{this.props.weather[0].description}</p></div>                
             </div>
