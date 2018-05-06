@@ -8,6 +8,7 @@ import { IWeather } from './components/Weather/IWeather';
 
 export interface IAppState {
     weatherData: IWeather;
+    error: boolean;
 }
 
 /*******************************/

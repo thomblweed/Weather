@@ -22,10 +22,11 @@ export default class App extends React.Component<{}, IAppState> {
     // city code for Edinburgh
     this.cityId = "2650225";
     // api key
-    this.apiKey = "bd4ea88dd8b781d2f9a09b97dc3e0d04";    
+    this.apiKey = "bd4ea88dd8b781d2f9a09b97dc3e0d04";
   }
 
   public componentDidMount(): void {
+    // process async call to the weather data
     this.getWeatherDataByCityId();
   }
 
@@ -39,17 +40,26 @@ export default class App extends React.Component<{}, IAppState> {
         />           
       );
     }
+    else if (this.state && this.state.error) {
+      return (
+        <div>
+          <span>An error has occured fetching the weather, please contact your administrator</span>
+        </div>     
+      );
+    }
     else {
       return (
-        <div className="App">
-          No Data!
-        </div>            
+        <div>
+          <span>Loading...</span>
+        </div>
       );
     }
        
   }
 
-  private async getWeatherDataByCityId(): Promise<void>{
+  // get the weather data
+  // using an async method so we can use a try catch for error handling
+  private async getWeatherDataByCityId(): Promise<void> {
     // check if we have data in local storage before calling the api
     let weatherStorage: IWeather = weatherLocalStorage.load(weatherStorageKey);
     // if not in storage then make call to get weather data
@@ -59,17 +69,19 @@ export default class App extends React.Component<{}, IAppState> {
       try {
         // make the call for the weather data
         const fetchResponse = await fetch(fetchUrl);
-        // response to json
+        // process the response to json
         const responseJson = await fetchResponse.json();
         weatherStorage = responseJson;
         // save to local storage with expiration of 15 minutes
         weatherLocalStorage.save(weatherStorageKey, weatherStorage, 15);
-        // set  weather data to the state
+        // set weather data to the state
         this.setState({ weatherData: weatherStorage });
       } 
       catch (error) {
-        // TODO: error handling
-        console.log("Error fetching weather data by City ID: ", error);        
+        // log error message to the console
+        console.log("Error fetching weather data by City ID: ", error);
+        // flag to the state that we have an error
+        this.setState({ error: true });
       }      
     }
     else {

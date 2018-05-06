@@ -25,9 +25,9 @@ export default class Day extends React.Component<IDayProps> {
             <div className={this.today ? "todayOuter" : "futureOuter"}>
                 <div className={this.today ? "dateWrapperToday" : "dateWrapperFuture"}>
                     {this.today && <h3>Today</h3>}
-                    {this.today && <h4>{this.weekDay + this.numericDay + " " + this.month + " " + this.year}</h4>}
+                    {this.today && <h4>{this.weekDay} {this.numericDay} {this.month} {this.year}</h4>}
                     {!this.today && <h4>{this.weekDay}</h4>}
-                    {!this.today && <p>{this.numericDay + " " + this.month + " " + this.year}</p>}
+                    {!this.today && <p>{this.numericDay} {this.month} {this.year}</p>}
                 </div>
                 <div className={this.today ? "listWrapperToday" : "listWrapperFuture"}>
                     {this.createListComponents()}
@@ -67,11 +67,15 @@ export default class Day extends React.Component<IDayProps> {
         this.month = this.date.toLocaleString("en-uk", { month: "long" });
         this.year = this.date.toLocaleString("en-uk", { year: "numeric" });
         
+        // get today's date in string format
         this.todayDateString = this.getTodayDateString();
+        // get today's date at midnight
         this.todayDate = new Date(this.todayDateString);        
 
+        // get today's date and component date with same midnight time for comparison
         let todayDateTime = this.todayDate.getTime();
-        let dateTime = this.date.getTime();        
+        let dateTime = this.date.getTime();
+        // compare the dates with the same time (midnight) to flag if it is 'today'   
         if(todayDateTime == dateTime) {
             this.today = true;            
         }
