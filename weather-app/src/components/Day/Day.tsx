@@ -96,9 +96,17 @@ export default class Day extends React.Component<IDayProps> {
         if(dd < 10) {
             stringDD = "0" + dd;
         }
+        else {
+            stringDD = dd.toString();
+        }
+
         if(mm < 10) {
             stringMM = "0" + mm;
         }
+        else {
+            stringMM = mm.toString();
+        }
+        
         let todayString: string;
         todayString =  yyyy + '-' + stringMM + '-' + stringDD;
 
