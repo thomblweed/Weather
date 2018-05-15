@@ -56,4 +56,7 @@ describe('<Day />', ()=> {
     it('  createListComponents function renders List component(s)', () => {
         expect(day.find(List));
     });
+    it('  renders the wrapper div for "today"', ()=> {
+        expect(day.find('div.todayOuter')).toHaveLength(1);
+    });    
 });
