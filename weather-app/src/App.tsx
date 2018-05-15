@@ -42,7 +42,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
     // else if we have an error, render a feedback message to the user
     else if (this.state && this.state.error) {
       return (
-        <div>
+        <div className={'errorWrapper'}>
           <span>An error has occured fetching the weather, please contact your administrator</span>
         </div>     
       );

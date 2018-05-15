@@ -6,7 +6,7 @@ import { configure } from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 // test
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 // async function test
 export default async function asyncFetch(url: string) {
@@ -41,7 +41,17 @@ describe('<App />', () => {
       const result = await response.json();
       // success code should be 200
       expect(result.cod).toEqual("200");
-    });
+    });    
   });
 
+  // check state changes update dom correctly
+  describe('    Checking state changes update in correct context', ()=> {
+    it('  error in state shows error message to user', ()=> {
+      const wrapper = mount(<App />);
+      // set error to state
+      wrapper.setState({ error: true });
+      // expect to find the error message rendered
+      expect(wrapper.find('div.errorWrapper')).toHaveLength(1);
+    });
+  });
 });
