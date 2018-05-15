@@ -50,7 +50,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
     // otherwise we are waiting for the async call to the data api for weather data
     else {
       return (
-        <div>
+        <div className={'loadingWrapper'}>
           <span>Loading...</span>
         </div>
       );
