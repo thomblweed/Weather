@@ -3,12 +3,10 @@ import * as React from 'react';
 import App from './App';
 import Weather from './components/Weather/Weather'
 // setup
-import { configure } from 'enzyme';
+import { configure, shallow } from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
-// test
-import { shallow, mount } from 'enzyme';
-// async function test
+// async fetch function test
 export default async function asyncFetch(url: string) {
   return await fetch(url);
 }
@@ -45,8 +43,8 @@ describe('<App />', () => {
     });    
   });
 
-  // check state changes update render correct components
-  describe('    Checking state changes render correct component', ()=> {
+  // check state changes render correct components
+  describe('    Checking state changes render correct components', ()=> {
     it('  initial state values shows loading message to user', ()=> {
       const wrapper = shallow(<App />);
       // expect to find the loading message rendered
