@@ -32,7 +32,7 @@ export default class Day extends React.Component<IDayProps> {
                 <div className={this.today ? "listWrapperToday" : "listWrapperFuture"}>
                     {this.createListComponents()}
                 </div>
-            </div>         
+            </div>
         );
     }
 
