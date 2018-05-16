@@ -71,3 +71,9 @@ Testing this way as the data is usually returned so fast it's hard to see the no
 -- This will cause an error to the api call and show a message to the user
 -- The stack error message will be logged in the console
 -- Switch the prop values back to default as they were
+
+## Update on Testing ##
+-- Unit tests added for each component using Enzyme
+-- To run test in the command line type 'npm test'
+-- when prompted, press 'a' to run all tests
+-- there are comments, 'describes' and 'it' tests in each test file

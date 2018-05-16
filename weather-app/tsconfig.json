@@ -25,6 +25,11 @@
     "acceptance-tests",
     "webpack",
     "jest",
-    "src/setupTests.ts"
+    "src/setupTests.ts",
+    "src/App.test.tsx",
+    "src/components/City/City.test.tsx",
+    "src/components/Day/Day.test.tsx",
+    "src/components/List/List.test.tsx",
+    "src/components/Weather/Weather.test.tsx"
   ]
 }

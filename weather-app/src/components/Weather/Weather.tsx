@@ -2,7 +2,7 @@ import * as React from 'react';
 import { IWeatherProps } from './IWeatherProps';
 import City from '../City/City';
 import Day from '../Day/Day';
-import {IWeatherList } from './IWeather';
+import { IWeatherList } from './IWeather';
 export interface IDayLists {
     date: string, 
     list: IWeatherList[]

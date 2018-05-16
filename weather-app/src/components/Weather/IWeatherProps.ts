@@ -1,6 +1,6 @@
 import { IWeatherList, ICityInfo } from '../Weather/IWeather';
 
 export interface IWeatherProps {
-    city: ICityInfo;
-    list: IWeatherList[];
+    city?: ICityInfo;
+    list?: IWeatherList[];
 }
