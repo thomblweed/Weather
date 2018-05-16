@@ -50,13 +50,10 @@ const day = shallow(
 );
 
 describe('<Day />', ()=> {
-    it('  should a render <Day /> component', () => {
+    it('  should render a <Day /> component', () => {
         expect(day).toHaveLength(1);
     });
     it('  createListComponents function renders List component(s)', () => {
         expect(day.find(List));
-    });
-    it('  renders the wrapper div for "today"', ()=> {
-        expect(day.find('div.todayOuter')).toHaveLength(1);
-    });    
+    });     
 });
