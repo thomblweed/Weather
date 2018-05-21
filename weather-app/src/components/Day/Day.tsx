@@ -1,39 +1,49 @@
 import * as React from 'react';
-import { IDayProps } from './IDayProps';
+import { IDayProps, IDayState } from './IDayProps';
 import List from '../List/List';
 import '../../helpers/weather.css';
 
-export default class Day extends React.Component<IDayProps> {
-    // variables required for showing UK days and dates
-    private date: Date;
-    private todayDateString: string;
-    private todayDate: Date;
-    private today: boolean;
-    private weekDay: string;
-    private numericDay: string;
-    private month: string;
-    private year: string;
+export default class Day extends React.Component<IDayProps, IDayState> {
     
     constructor(props: IDayProps) {
-        super(props);
-        // set values to the local variables
-        this.processDateAndDayVariables();
+        super(props);        
+        
+        this.state = {
+            today: null,
+            weekDay: null,
+            numericDay: null,
+            month: null,
+            year: null
+          }        
     }
+
+    public componentDidMount(): void {
+        // set values to the local variables
+        this.processDateAndDayState();
+    }    
     
     public render(): React.ReactElement<IDayProps> {
-        return (
-            <div className={this.today ? "todayOuter" : "futureOuter"}>
-                <div className={this.today ? "dateWrapperToday" : "dateWrapperFuture"}>
-                    {this.today && <h3>Today</h3>}
-                    {this.today && <h4>{this.weekDay} {this.numericDay} {this.month} {this.year}</h4>}
-                    {!this.today && <h4>{this.weekDay}</h4>}
-                    {!this.today && <p>{this.numericDay} {this.month} {this.year}</p>}
+        
+        if(this.state && this.state.today != null) {
+            return (
+                <div className={this.state.today ? "todayOuter" : "futureOuter"}>
+                    <div className={this.state.today ? "dateWrapperToday" : "dateWrapperFuture"}>
+                        {this.state.today && <h3>Today</h3>}
+                        {this.state.today && <h4>{this.state.weekDay} {this.state.numericDay} {this.state.month} {this.state.year}</h4>}
+                        {!this.state.today && <h4>{this.state.weekDay}</h4>}
+                        {!this.state.today && <p>{this.state.numericDay} {this.state.month} {this.state.year}</p>}
+                    </div>
+                    <div className={this.state.today ? "listWrapperToday" : "listWrapperFuture"}>
+                        {this.createListComponents()}
+                    </div>
                 </div>
-                <div className={this.today ? "listWrapperToday" : "listWrapperFuture"}>
-                    {this.createListComponents()}
-                </div>
-            </div>
-        );
+            );
+        }
+        else {
+            return (
+                <div />
+            );
+        }
     }
 
     // render a List component for each value past through in the array list property
@@ -53,43 +63,54 @@ export default class Day extends React.Component<IDayProps> {
                  snow={this.props.list[key].snow}
                  sys={this.props.list[key].sys}
                  dt_txt={this.props.list[key].dt_txt}
-                 today={this.today}
+                 today={this.state.today}
                 />
             );
         });
     }
 
-    private processDateAndDayVariables(): void {
-        
-        // set 'friendly' date formatting names to the local variables
-        this.date = new Date(this.props.date);
-        this.weekDay = this.date.toLocaleString("en-uk", { weekday: "long" });
-        this.numericDay = this.date.toLocaleString("en-uk", { day: "2-digit" });
-        this.month = this.date.toLocaleString("en-uk", { month: "long" });
-        this.year = this.date.toLocaleString("en-uk", { year: "numeric" });
+    private processDateAndDayState(): void {     
+        // set 'friendly' date formatting names to the state
+        const date: Date = new Date(this.props.date);
+        const weekDay: string = date.toLocaleString("en-uk", { weekday: "long" });
+        const numericDay: string = date.toLocaleString("en-uk", { day: "2-digit" });
+        const month: string = date.toLocaleString("en-uk", { month: "long" });
+        const year: string = date.toLocaleString("en-uk", { year: "numeric" });
         
         // get today's date in string format
-        this.todayDateString = this.getTodayDateString();
+        const todayDateString: string = this.getTodayDateString();
         // get today's date at midnight
-        this.todayDate = new Date(this.todayDateString);        
+        const todayDate: Date = new Date(todayDateString);        
 
         // get today's date and component date with same midnight time for comparison
-        let todayDateTime = this.todayDate.getTime();
-        let dateTime = this.date.getTime();
+        const todayDateTime = todayDate.getTime();
+        const dateTime = date.getTime();
         // compare the dates with the same time (midnight) to flag if it is 'today'   
         if(todayDateTime == dateTime) {
-            this.today = true;            
+            this.setState({  
+                today: true,
+                weekDay: weekDay,
+                numericDay: numericDay,
+                month: month,
+                year: year
+            });
         }
         else {
-            this.today = false;            
+            this.setState({  
+                today: false,
+                weekDay: weekDay,
+                numericDay: numericDay,
+                month: month,
+                year: year
+            });      
         }  
     }
 
     private getTodayDateString(): string {
-        let today = new Date();
-        let dd = today.getDate();
-        let mm = today.getMonth()+1; //January is 0!
-        let yyyy = today.getFullYear();
+        const today = new Date();
+        const dd = today.getDate();
+        const mm = today.getMonth()+1; //January is 0!
+        const yyyy = today.getFullYear();
         let stringDD: string;
         let stringMM: string;
 
