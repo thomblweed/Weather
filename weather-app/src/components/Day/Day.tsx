@@ -86,13 +86,17 @@ export default class Day extends React.Component<IDayProps> {
     }
 
     private getTodayDateString(): string {
+        // get Date for 'today'
         let today = new Date();
+        // get numeric values for Day/Month/Year
         let dd = today.getDate();
         let mm = today.getMonth()+1; //January is 0!
         let yyyy = today.getFullYear();
+        // declare string variables for Day and Month
         let stringDD: string;
         let stringMM: string;
 
+        // if numeric day is less than 10 we need to append a string '0' 
         if(dd < 10) {
             stringDD = "0" + dd;
         }
@@ -100,6 +104,7 @@ export default class Day extends React.Component<IDayProps> {
             stringDD = dd.toString();
         }
 
+        // if numeric month is less than 10 we need to append a string '0' 
         if(mm < 10) {
             stringMM = "0" + mm;
         }
@@ -107,6 +112,7 @@ export default class Day extends React.Component<IDayProps> {
             stringMM = mm.toString();
         }
         
+        // build today's string date in UK format
         let todayString: string;
         todayString =  yyyy + '-' + stringMM + '-' + stringDD;
 
